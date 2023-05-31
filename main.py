@@ -1,7 +1,7 @@
-from city import city_name
 from dotenv import load_dotenv
 import requests
 import os
+from city import city_name
 
 def configure():
     load_dotenv()
