@@ -6,18 +6,18 @@ from city import city_name
 def configure():
     load_dotenv()
 
-def get_current_weather(session, city_name):
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={os.getenv('api_key')}",
-    r = session.get(url)
-    return r.json()
-
+def get_current_weather(api_key, city_name):
+    url = "http://api.openweathermap.org/data/2.5/weather?appid=" + api_key + "&q=" + city_name
+    response = requests.get(url).json()
+    return response
 
 def main():
     configure()
-    s = requests.Session()
-    w = get_current_weather(s, city_name)
-    print(w)
-
+    API_KEY = os.getenv('API_KEY')    
+    w = get_current_weather(api_key=API_KEY, city_name=city_name)
+    for k, v in w.items():
+        print(k, v)
 
 if __name__ == '__main__':
     main()
+
